@@ -10,15 +10,20 @@ Setting this up in terms of authenticating with Evernote (required) and Gmail (o
 
 **Evernote** - Because the script needs access to your Evernote, you need to get a production developer token [here](https://dev.evernote.com/doc/articles/dev_tokens.php). Anyone can get a sandbox token but you'll have to open a ticket with Evernote and request a developer token to get the Production Service Token link to work.
 
-Once you have the token, update the **PROD_DEVELOPER_TOKEN** variable in send_evernote_email.py
+Once you have the token, update the `PROD_DEVELOPER_TOKEN` variable in `send_evernote_email.py` along with the sending and receiving emails.
 
-**Gmail** - I followed a great tutorial [here](https://blog.macuyiko.com/post/2016/how-to-send-html-mails-with-oauth2-and-gmail-in-python.html) for setting up OAuth2 with Gmail and the gmail.py file is taken from there. This is optional if you don't want an automated email or you want to use a different email integration.
-
-Along with updating GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and  GOOGLE_REFRESH_TOKEN per the tutorial, you'll just need to specify directly below those variables the sending and receiving emails. 
+**Gmail** - To authorize sending of emails from your personal account, you can set an app password for the account you want to send emails from ([instructions here](https://support.google.com/accounts/answer/185833?hl=en)) and update the variable `APP_PASSWORD_FOR_SENDING_EMAIL` in `send_evernote_email.py`. 
 
 # Usage
 
-In send_evernote_email.py, you can change the tag that you want to use to select notes (default is "Daily-Email"), the number of notes per email, and the email to use for sending and receiving.
+Through command line arguments you can specify the tag that you want to use to select notes, the number of notes per email, and the number of days to wait before resending a note.
+
+Example:
+```
+python send_evernote_email.py --tag Daily-Email-ML --select-count 3 --min-days-between 30
+```
+
+This example will collect all notes with the tag "Daily-Email-ML", randomly select 3 of them that haven't been sent in the last 30 days, and send the email.
 
 I set up this code on a free-tier GCP instance and set up a cron job to run the script every morning. Followed this cron tutorial [here](https://towardsdatascience.com/how-to-schedule-python-scripts-with-cron-the-only-guide-youll-ever-need-deea2df63b4e).
 
