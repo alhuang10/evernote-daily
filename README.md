@@ -6,6 +6,14 @@ Couldn't find this functionality anywhere online so decided to create it in case
 
 # Setup
 
+## Python
+
+Python Version Used: 3.7.0
+
+Standard python package installation process: `pip3 install -r requirements.txt`. Virtual environment recommended.
+
+## Evernote and Gmail
+
 Setting this up in terms of authenticating with Evernote (required) and Gmail (optional if you don't want it in the form of an email) is a bit non-trivial.
 
 **Evernote** - Because the script needs access to your Evernote, you need to get a production developer token [here](https://dev.evernote.com/doc/articles/dev_tokens.php). Anyone can get a sandbox token but you'll have to open a ticket with Evernote and request a developer token to get the Production Service Token link to work.
